@@ -1,0 +1,25 @@
+
+# Descrição do Nome do PZT ----------------------------------------------------------------------------------------
+	PZT1T1 (PZT 1, na Temperatura 1)
+
+# Faixa de Temperatura Avaliadas ----------------------------------------------------------------------------------
+	T1: -10ºC  (Obs.: Ruim em Alguns Estados de Integridade Estrutural)
+	T2:   0ºC  
+	T3:  10ºC
+	T4:  20ºC
+	T5:  30ºC  (Obs.: Ruim em Alguns Estados de Integridade Estrutural)
+	T6:  40ºC  (Obs.: Ruim em Alguns Estados de Integridade Estrutural)
+	T7:  50ºC  (Obs.: Ruim em Alguns Estados de Integridade Estrutural)
+
+# Disposição dos Dados em cada Arquivo .csv -----------------------------------------------------------------------
+       Coluna    | Estado     | Descrição
+       001º      | Frequência | Range: 68kHz-77kHz
+       002º-021º | Baseline   | 20 amostras (Parte Real - Impedância)
+       022º-041º | Dano 1     | 20 amostras (Parte Real - Impedância)
+       042º-061º | Dano 2     | 20 amostras (Parte Real - Impedância)
+       062º-081º | Dano 3     | 20 amostras (Parte Real - Impedância)
+       082º-101º | Dano 4     | 20 amostras (Parte Real - Impedância)
+
+
+
+
