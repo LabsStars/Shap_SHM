@@ -1,33 +1,26 @@
+#%%
+
 # IMPORTA AS BIBLIOTECAS NECESSARIAS PARA A EXECUCAO DO PROGRAMA -------------------------------------------------------
-from tkinter import *  # NECESSARIA PARA A MANIPULACAO DE COMPONENTES DA INTERFACE
-from tkinter import filedialog  # NECESSARIA PARA A CRIACAO DA INTERFACE MODAL (SELECIONAR O DIRETORIO RAIZ)
-from tkinter import messagebox  # NECESSARIA PARA A CRIACAO DA INTERFACE MODAL (ALERTA DE ERROR)
 import os as so  # NECESSARIA PARA A MANIPULACAO DAS FUNCOES DO SISTEMA OPERACIONAL
 from os.path import isfile, join  # NECESSARIA PARA A VERIFICACAO DOS SUBDIRETORIOS
 import numpy as np  # NECESSARIA PARA A MANIPULACAO VETORIAL (ARRAYS)
 import csv  # NECESSARIA PARA A LEITURA DOS ARQUIVOS .CSV
-import tensorflow as tf  # NECESSARIA PARA A EXECUCAO/TREINAMENTO E SIMULACAO DO MODELO CNN
 import matplotlib.pyplot as plt  # NECESSARIA PARA A PLOTAGEM DAS AMOSTRAS E DEMAIS GRAFICOS
 from sklearn.preprocessing import normalize
-from tensorflow import keras
 import os
 # ----------------------------------------------------------------------------------------------------------------------
 
-# IMPORTA O MODELO (ARQUITETURA) DEFINIDA EM OUTRO .py -----------------------------------------------------------------
-import Codigos_2020.Qualificacao.Vigas_UFU_CNN.Arquitetura_CNN_3 as Rede
-
 # ----------------------------------------------------------------------------------------------------------------------
-
 ''' REALIZA A LEITURA DO DIRETORIO E QUANTIDADES DE CADA COMPONENTE ================================================ '''
 
 ''' INTERFACE DE ENTRADA (INICIO) ---------------------------------------------------------------------------------- '''
 
 global diretorio, quantidadeamostras, quantidadeniveis, quantidadetemperaturas, quantidadepzt
-diretorio = 'C:/Users/Stanl/OneDrive/Área de Trabalho/Experimento - Porcas - UFU - 3 Vigas/Dados - Experimento com Porcas - 3 Vigas de Aço/Pasta de Dados/Validos/'
+diretorio = '/home/bruno/Desktop/Coletas_ze/shap_SHM/Dados - Experimento com Porcas - 3 Vigas de Aço/Pasta de Dados/Validos/'
 quantidadeamostras = 20
 quantidadeniveis = 5
 quantidadetemperaturas = 3
-quantidadepzt = 1
+quantidadepzt = 3
 
 ''' REALIZA A LEITURA DE CADA AMOSTRA (INICIO) --------------------------------------------------------------------- '''
 
@@ -160,27 +153,12 @@ for i in range(quantidadetemperaturas):
     target_treinamento = np.concatenate((target_treinamento, aux), axis=0)
 # ----------------------------------------------------------------------------------------------------------------------
 
-# DEFINE OS TARGETS COMO VETOR DE CATEGORIAS ([1,0,0,0]) ---------------------------------------------------------------
-target_treinamento = tf.keras.utils.to_categorical(target_treinamento,
-                                                   num_classes=2)
-target_simulacao = tf.keras.utils.to_categorical(target_simulacao,
-                                                 num_classes=quantidadetemperaturas * quantidadeniveis)
-# ----------------------------------------------------------------------------------------------------------------------
 
 # PLOTANDO AS AMOSTRAS UTILIZADAS PARA SIMULACAO (APENAS VERIFICACAO) --------------------------------------------------
 plt.plot(amostras_simulacao)
 plt.show()
 # ----------------------------------------------------------------------------------------------------------------------
 
-# AJUSTA AS DIMENSOES DO VETOR (ARRAY) DE DADOS PARA A SUA APLICACAO NO MODELO CNN -------------------------------------
-amostras_treinamento = np.transpose(amostras_treinamento)
-amostras_simulacao = np.transpose(amostras_simulacao)
-amostras_treinamento = tf.keras.backend.expand_dims(amostras_treinamento, axis=2)
-amostras_simulacao = tf.keras.backend.expand_dims(amostras_simulacao, axis=2)
-# ----------------------------------------------------------------------------------------------------------------------
-
-# ENCONTRA AS DIMENSOES DE CADA SINAL ----------------------------------------------------------------------------------
-formato_sinal = np.shape(amostras_treinamento)[1:3]
 # ----------------------------------------------------------------------------------------------------------------------
 
 # IMPRIMINDO AS INFORMACOES DOS DADOS ----------------------------------------------------------------------------------
@@ -214,3 +192,4 @@ print('')
 ''' DEFINE AS CONFIGURACOES DOS DADOS PARA TREINAMENTO/SIMULACAO (TERMINO) ----------------------------------------- '''
 
 ''' PONTO ATUAL: EXECUTOU-SE A LEITURA DOS ARQUIVOS .csv E DEFINIU OS CONJUNTOS DE TREINAMENTO E DE SIMULACAO ------ '''
+# %%
